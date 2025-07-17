@@ -21,7 +21,7 @@ export default function UpdateUser({ params }) {
 
     const getUserDetail = async () => {
         try {
-            let data = await fetch(`http://localhost:3000/api/students/${id}`, { cache: "no-cache" });
+            let data = await fetch(`${NEXT_PUBLIC_SITE_URL}/api/students/${id}`, { cache: "no-cache" });
             data = await data.json();
 
             if (data.success) {
@@ -51,7 +51,7 @@ export default function UpdateUser({ params }) {
         }
 
         try {
-            let response = await fetch(`http://localhost:3000/api/students/${id}`, {
+            let response = await fetch(`${NEXT_PUBLIC_SITE_URL}/api/students/${id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
