@@ -21,8 +21,8 @@ export async function GET(request, content){
     const data= await Student.findById(record)
     return NextResponse.json({result: data, success:true})
 }
-export async function DELETE(request, {params}){
-    const studentId= params.studentid;
+export async function DELETE(request, content){
+    const studentId= content.params.studentid;
     const record= {_id: studentId};
     await mongoose.connect(connectionStr);
     const result= await Student.deleteOne(record);
