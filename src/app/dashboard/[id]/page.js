@@ -3,10 +3,9 @@ import Link from "next/link";
 import { IoMdMail } from "react-icons/io";
 import { FcDepartment } from "react-icons/fc";
 
-// Fetch single student by ID
 const getStudentById = async (id) => {
     try {
-        const res = await fetch(`http://localhost:3000/api/students/${id}`, {
+        const res = await fetch(`/api/students/${id}`, {
             cache: "no-cache",
         });
         const data = await res.json();
@@ -24,6 +23,8 @@ const getStudentById = async (id) => {
 export default async function StudentProfile({ params }) {
     const { id } = params;
     const student = await getStudentById(id);
+
+   
 
     if (!student) {
         return (

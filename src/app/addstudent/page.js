@@ -20,7 +20,7 @@ export default function Page(){
         }
         console.log(name, fatherName, email, phone, department, rollno, registration)
 
-        let data=   await fetch("http://localhost:3000/api/students",{
+        let data=   await fetch("/api/students",{
             method:"POST",
             body:JSON.stringify({name, fatherName, email,phone, department, rollno, registration})
         });

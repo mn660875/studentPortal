@@ -17,6 +17,7 @@ export default function DeleteUsers(props){
                setTimeout(() => {
                 toast.success("Student deleted successfully");
                }, 1000);
+               
                 
             }
     }

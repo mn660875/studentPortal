@@ -7,7 +7,7 @@ import DeleteUsers from "@/lib/DeleteStudent";
 import { useRouter } from "next/navigation";
 
 const getStudent = async () => {
-  let data = await fetch("http://localhost:3000/api/students", {
+  let data = await fetch("/api/students", {
     cache: "no-cache",
   });
   data = await data.json();
