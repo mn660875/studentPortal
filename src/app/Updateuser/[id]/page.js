@@ -21,7 +21,7 @@ export default function UpdateUser({ params }) {
 
     const getUserDetail = async () => {
         try {
-            let data = await fetch(`/api/students/${id}`, { cache: "no-cache" });
+            let data = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/student/${id}`);
             data = await data.json();
 
             if (data.success) {
@@ -38,7 +38,7 @@ export default function UpdateUser({ params }) {
         } catch (error) {
             console.error(error);
             toast.error("Error fetching student data");
-            router.push("/dashboard/students");
+            router.push("/dashboard");
         }
     };
 
@@ -51,7 +51,7 @@ export default function UpdateUser({ params }) {
         }
 
         try {
-            let response = await fetch(`/api/students/${id}`, {
+            let response = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/student/${id}` , {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
