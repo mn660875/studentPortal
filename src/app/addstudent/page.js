@@ -18,8 +18,7 @@ export default function Page(){
             toast.error("Fields Should Not be empty") 
         return
         }
-        console.log(name, fatherName, email, phone, department, rollno, registration)
-
+            
         let data=   await fetch("/api/students",{
             method:"POST",
             body:JSON.stringify({name, fatherName, email,phone, department, rollno, registration})

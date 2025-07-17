@@ -5,9 +5,16 @@ import { FcDepartment } from "react-icons/fc";
 
 const getStudentById = async (id) => {
     try {
-        const res = await fetch(`/api/students/${id}`, {
-            cache: "no-cache",
-        });
+        const res = await fetch(
+            `${process.env.NEXT_PUBLIC_SITE_URL}/api/students/${id}`,
+            { cache: "no-store" }
+        );
+
+        if (!res.ok) {
+            console.error("Failed to fetch student:", res.status);
+            return null;
+        }
+
         const data = await res.json();
         if (data.success) {
             return data.result;
@@ -15,7 +22,7 @@ const getStudentById = async (id) => {
             return null;
         }
     } catch (error) {
-        console.error(error);
+        console.error("Fetch error:", error);
         return null;
     }
 };
@@ -23,8 +30,6 @@ const getStudentById = async (id) => {
 export default async function StudentProfile({ params }) {
     const { id } = params;
     const student = await getStudentById(id);
-
-   
 
     if (!student) {
         return (
@@ -48,9 +53,7 @@ export default async function StudentProfile({ params }) {
     return (
         <div className="flex min-h-screen gap-10 items-center">
             <Navbar />
-
             <div className="grid grid-cols-1 auto-rows-[140px] gap-4 w-full max-w-3xl md:grid-cols-2 lg:grid-cols-4">
-               
                 <div className="shadow-lg col-span-2 bg-[#CCCCFF] row-span-2 rounded-lg p-5">
                     <p className="text-gray-700">Name:</p>
                     <h1 className="text-xl font-semibold">{student.name}</h1>
@@ -76,7 +79,6 @@ export default async function StudentProfile({ params }) {
                     </div>
                 </div>
 
-               
                 <div className="shadow-lg col-span-2 bg-[#B9D9EB] rounded-lg p-5">
                     <p className="text-gray-700 flex items-center gap-2">
                         <IoMdMail className="text-lg" /> Email:
@@ -84,7 +86,6 @@ export default async function StudentProfile({ params }) {
                     <h4 className="text-lg font-semibold mt-2">{student.email}</h4>
                 </div>
 
-               
                 <div className="col-span-1 bg-[#E6E6FA] shadow-lg rounded-lg p-5">
                     <p className="text-gray-700 flex items-center gap-2">
                         <FcDepartment className="text-lg" /> Department:
@@ -92,7 +93,6 @@ export default async function StudentProfile({ params }) {
                     <h2 className="text-md font-semibold mt-2">{student.department}</h2>
                 </div>
 
-                
                 <div className="col-span-1 bg-[#8AB9F1] shadow-lg rounded-lg p-3">
                     <p className="text-gray-700">Registration No:</p>
                     <h1 className="font-semibold mt-1">{student.registration}</h1>
