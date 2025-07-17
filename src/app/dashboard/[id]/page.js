@@ -5,8 +5,7 @@ import { FcDepartment } from "react-icons/fc";
 
 const getStudentById = async (id) => {
     try {
-        const res = await fetch(
-            `${process.env.NEXT_PUBLIC_SITE_URL}/api/students/${id}`,
+        const res = await fetch("/api/students" + id,
             { cache: "no-store" }
         );
 
