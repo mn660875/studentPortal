@@ -4,7 +4,9 @@ import Link from "next/link";
 export default function Dashboard() {
     return (
         <div className="flex min-h-screen">
-            <Navbar />
+           <div className="hidden md:block">
+           <Navbar />
+           </div>
 
             <div className="flex-1 flex flex-col items-center justify-center text-center">
                 <h1 className="text-4xl font-bold mb-4 text-[#4B0082]">

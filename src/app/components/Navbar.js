@@ -6,7 +6,7 @@ import { TiUserAdd } from "react-icons/ti";
 
 export default function Navbar() {
     return (
-      <div className="w-48 min-h-screen bg-[#00BFFF] text-white flex flex-col p-4">
+      <div className="w-48 min-h-screen bg-[#00BFFF] text-white flex flex-col p-4 rounded-tr-xl rounded-br-xl ">
         <h1 className="text-xl font-bold mb-6">Student Portal</h1>
         <nav className="flex flex-col gap-2">
             <div className="flex items-center gap-2">

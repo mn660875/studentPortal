@@ -1,13 +1,13 @@
 "use client";
 
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Navbar from "@/app/components/Navbar";
 import { toast } from "react-toastify";
 import { useRouter } from "next/navigation";
 
 export default function UpdateUser({ params }) {
     const router = useRouter();
-    const { id } =  React.use(params);
+    const { id } = params;
 
     const [name, setName] = useState("");
     const [fatherName, setFatherName] = useState("");
@@ -21,11 +21,11 @@ export default function UpdateUser({ params }) {
 
     const getUserDetail = async () => {
         try {
-            let data = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/student/${id}`);
+            let data = await fetch(`http://localhost:3000/api/students/${id}`, { cache: "no-cache" });
             data = await data.json();
 
             if (data.success) {
-                const result = data.result;
+                let result = data.result;
                 setName(result.name || "");
                 setFatherName(result.fatherName || "");
                 setEmail(result.email || "");
@@ -33,7 +33,7 @@ export default function UpdateUser({ params }) {
                 setDepartment(result.department || "");
             } else {
                 toast.error("Student not found");
-                router.push("/profile");
+                router.push("/dashboard");
             }
         } catch (error) {
             console.error(error);
@@ -42,7 +42,7 @@ export default function UpdateUser({ params }) {
         }
     };
 
-    const updateStudent = async (e) => {
+    const UpdateStudent = async (e) => {
         e.preventDefault();
 
         if (!name || !fatherName || !email || !phone || !department) {
@@ -51,7 +51,7 @@ export default function UpdateUser({ params }) {
         }
 
         try {
-            let response = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/student/${id}` , {
+            let response = await fetch(`http://localhost:3000/api/students/${id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
@@ -64,7 +64,7 @@ export default function UpdateUser({ params }) {
             if (response.success) {
                 toast.success("Student has been updated");
                 setTimeout(() => {
-                    router.push("profile");
+                    router.push("/dashboard/students");
                 }, 1500);
             } else {
                 toast.error("Failed to update student");
@@ -76,11 +76,11 @@ export default function UpdateUser({ params }) {
     };
 
     return (
-        <div className="flex min-h-screen ">
+        <div className="flex min-h-screen">
             <Navbar />
             <div className="shadow-lg rounded-lg bg-white w-full max-w-md p-6">
                 <h1 className="text-center text-2xl font-bold mb-4">Update Student</h1>
-                <form onSubmit={updateStudent} className="space-y-4">
+                <form onSubmit={UpdateStudent} className="space-y-4">
                     <input
                         type="text"
                         placeholder="Full Name"

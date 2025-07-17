@@ -10,11 +10,7 @@ const getStudentById = async (id) => {
             { cache: "no-store" }
         );
 
-        if (!res.ok) {
-            console.error("Failed to fetch student:", res.status);
-            return null;
-        }
-
+        
         const data = await res.json();
         if (data.success) {
             return data.result;
@@ -27,13 +23,13 @@ const getStudentById = async (id) => {
     }
 };
 
-export default async function StudentProfile({ params }) {
-    const { id } = params;
+export default async function StudentProfile(props) {
+    const { id } = props.params;
     const student = await getStudentById(id);
 
     if (!student) {
         return (
-            <div className="flex">
+            <div className="flex min-h-screen">
                 <Navbar />
                 <div className="p-10 text-center w-full">
                     <h1 className="text-2xl font-bold text-red-600">
@@ -52,7 +48,9 @@ export default async function StudentProfile({ params }) {
 
     return (
         <div className="flex min-h-screen gap-10 items-center">
-            <Navbar />
+           <div className="hidden md:block">
+           <Navbar />
+           </div>
             <div className="grid grid-cols-1 auto-rows-[140px] gap-4 w-full max-w-3xl md:grid-cols-2 lg:grid-cols-4">
                 <div className="shadow-lg col-span-2 bg-[#CCCCFF] row-span-2 rounded-lg p-5">
                     <p className="text-gray-700">Name:</p>

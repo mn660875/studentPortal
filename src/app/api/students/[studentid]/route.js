@@ -12,19 +12,40 @@ export async function PUT(request, content){
     const result= await Student.findOneAndUpdate(filter, payload)
     return NextResponse.json({result, success:true})
 }
-export async function GET(request, content){
-    
-    const studentId= content.params.studentid
-   const record= {_id:studentId};
-  
-   await mongoose.connect(connectionStr)
-    const data= await Student.findById(record)
-    return NextResponse.json({result: data, success:true})
-}
-export async function DELETE(request, content){
-    const studentId= content.params.studentid;
-    const record= {_id: studentId};
+
+
+export async function GET(request, context) {
+    const { params } = await context;
+    const studentId = params.studentid;
+
     await mongoose.connect(connectionStr);
-    const result= await Student.deleteOne(record);
-    return NextResponse.json({result, success: true}) 
+
+    try {
+        const student = await Student.findById(studentId);
+        if (!student) {
+            return NextResponse.json({ success: false, message: "Student not found" }, { status: 404 });
+        }
+        return NextResponse.json({ success: true, result: student });
+    } catch (error) {
+        console.error(error);
+        return NextResponse.json({ success: false, message: "Error fetching student" }, { status: 500 });
+    }
+}
+
+export async function DELETE(request, context) {
+    const { params } = await context;
+    const studentId = params.studentid;
+
+    await mongoose.connect(connectionStr);
+
+    try {
+        const result = await Student.deleteOne({ _id: studentId });
+        if (result.deletedCount === 0) {
+            return NextResponse.json({ success: false, message: "Student not found" });
+        }
+        return NextResponse.json({ success: true, message: "Student deleted successfully" });
+    } catch (error) {
+        console.error(error);
+        return NextResponse.json({ success: false, message: "Error deleting student" });
+    }
 }
