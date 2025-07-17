@@ -5,8 +5,7 @@ import { FcDepartment } from "react-icons/fc";
 
 const getStudentById = async (id) => {
     try {
-        const res = await fetch(
-            `${process.env.NEXT_PUBLIC_SITE_URL}/api/students/${id}`,
+        const res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/students/${id}`,
             { cache: "no-store" }
         );
 
@@ -26,6 +25,7 @@ const getStudentById = async (id) => {
 export default async function StudentProfile(props) {
     const { id } = props.params;
     const student = await getStudentById(id);
+    console.log(student)
 
     if (!student) {
         return (
