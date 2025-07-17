@@ -21,12 +21,10 @@ const getStudent = async () => {
 };
 
 export default function StudentList() {
-  
   const [students, setStudents] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
-   
     const fetchStudents = async () => {
       const users = await getStudent();
       setStudents(users);
@@ -37,10 +35,16 @@ export default function StudentList() {
   const filteredStudents = students.filter(
     (student) =>
       (student.name || "").toLowerCase().includes(searchQuery.toLowerCase()) ||
-      (student.fatherName || "").toLowerCase().includes(searchQuery.toLowerCase()) ||
+      (student.fatherName || "")
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase()) ||
       (student.email || "").toLowerCase().includes(searchQuery.toLowerCase()) ||
-      (student.rollno || "").toLowerCase().includes(searchQuery.toLowerCase()) ||
-      (student.registration || "").toLowerCase().includes(searchQuery.toLowerCase())
+      (student.rollno || "")
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase()) ||
+      (student.registration || "")
+        .toLowerCase()
+        .includes(searchQuery.toLowerCase())
   );
 
   return (
@@ -85,11 +89,13 @@ export default function StudentList() {
                       href={`/dashboard/${item._id}`}
                       className="text-blue-600"
                     >
-                      <FaUserEdit  className="flex items-center  justify-center text-2xl"  />
+                      <FaUserEdit className="flex items-center  justify-center text-2xl" />
                     </Link>
-                   
                   </td>
-                  <td> <DeleteUsers id={item._id} /></td>
+                  <td>
+                    {" "}
+                    <DeleteUsers id={item._id} />
+                  </td>
                 </tr>
               ))
             ) : (
