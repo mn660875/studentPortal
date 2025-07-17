@@ -5,6 +5,7 @@ import Navbar from "../components/Navbar";
 import { useEffect, useState } from "react";
 import DeleteUsers from "@/lib/DeleteStudent";
 import { useRouter } from "next/navigation";
+import { FaUserEdit } from "react-icons/fa";
 
 const getStudent = async () => {
   let data = await fetch("/api/students", {
@@ -82,9 +83,9 @@ export default function StudentList() {
                   <td className="border p-2">
                     <Link
                       href={`/dashboard/${item._id}`}
-                      className="text-blue-600 hover:underline"
+                      className="text-blue-600"
                     >
-                      View
+                      <FaUserEdit  className="flex items-center  justify-center text-2xl"  />
                     </Link>
                    
                   </td>
