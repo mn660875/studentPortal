@@ -25,7 +25,6 @@ const getStudentById = async (id) => {
 export default async function StudentProfile(props) {
     const { id } = props.params;
     const student = await getStudentById(id);
-    console.log(student)
 
     if (!student) {
         return (

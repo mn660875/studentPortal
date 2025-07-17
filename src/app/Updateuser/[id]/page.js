@@ -1,126 +1,87 @@
 "use client";
 
-import { useEffect, useState } from "react";
 import Navbar from "@/app/components/Navbar";
+import { useParams, useRouter } from "next/navigation";
+import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
-import { useRouter } from "next/navigation";
 
-export default function UpdateUser({ params }) {
+export default function Page() {
+    const { id } = useParams();
     const router = useRouter();
-    const { id } = params;
-
     const [name, setName] = useState("");
-    const [fatherName, setFatherName] = useState("");
-    const [email, setEmail] = useState("");
-    const [phone, setPhone] = useState("");
-    const [department, setDepartment] = useState("");
 
     useEffect(() => {
-        getUserDetail();
-    }, []);
+        if (id) {
+            getUserDetails();
+        }
+    }, [id]);
 
-    const getUserDetail = async () => {
+    const getUserDetails = async () => {
         try {
-            let data = await fetch(`${NEXT_PUBLIC_SITE_URL}/api/students/${id}`, { cache: "no-cache" });
-            data = await data.json();
+            let res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/students/${id}`);
+            let data = await res.json();
+            console.log(data);
 
             if (data.success) {
-                let result = data.result;
-                setName(result.name || "");
-                setFatherName(result.fatherName || "");
-                setEmail(result.email || "");
-                setPhone(result.phone || "");
-                setDepartment(result.department || "");
+                setName(data.result.name || "");
             } else {
-                toast.error("Student not found");
+                toast.error("User not found");
                 router.push("/dashboard");
             }
         } catch (error) {
             console.error(error);
-            toast.error("Error fetching student data");
-            router.push("/dashboard");
+            toast.error("Error fetching user data");
         }
     };
 
-    const UpdateStudent = async (e) => {
+    const handleStudent = async (e) => {
         e.preventDefault();
-
-        if (!name || !fatherName || !email || !phone || !department) {
-            toast.error("Fields should not be empty");
+        if (!name.trim()) {
+            toast.error("Enter a name before submitting");
             return;
         }
 
         try {
-            let response = await fetch(`${NEXT_PUBLIC_SITE_URL}/api/students/${id}`, {
+            let res = await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/students/${id}`, {
                 method: "PUT",
                 headers: {
                     "Content-Type": "application/json",
                 },
-                body: JSON.stringify({ name, fatherName, email, phone, department }),
+                body: JSON.stringify({ name }),
             });
+            let data = await res.json();
 
-            response = await response.json();
-
-            if (response.success) {
-                toast.success("Student has been updated");
+            if (data.success) {
+                toast.success("User has been updated");
                 setTimeout(() => {
-                    router.push("/dashboard/students");
+                    router.push("/dashboard");
                 }, 1500);
             } else {
-                toast.error("Failed to update student");
+                toast.error("Failed to update user");
             }
         } catch (error) {
             console.error(error);
-            toast.error("Error updating student");
+            toast.error("Error updating user");
         }
     };
 
     return (
         <div className="flex min-h-screen">
             <Navbar />
-            <div className="shadow-lg rounded-lg bg-white w-full max-w-md p-6">
-                <h1 className="text-center text-2xl font-bold mb-4">Update Student</h1>
-                <form onSubmit={UpdateStudent} className="space-y-4">
+            <div className="flex items-center justify-center w-full">
+                <form onSubmit={handleStudent} className="flex flex-col gap-4 bg-white p-6 rounded shadow-md">
                     <input
                         type="text"
-                        placeholder="Full Name"
+                        placeholder="Enter Name"
                         value={name}
                         onChange={(e) => setName(e.target.value)}
-                        className="w-full p-2 border rounded"
-                    />
-                    <input
-                        type="text"
-                        placeholder="Father's Name"
-                        value={fatherName}
-                        onChange={(e) => setFatherName(e.target.value)}
-                        className="w-full p-2 border rounded"
-                    />
-                    <input
-                        type="email"
-                        placeholder="Email"
-                        value={email}
-                        onChange={(e) => setEmail(e.target.value)}
-                        className="w-full p-2 border rounded"
-                    />
-                    <input
-                        type="text"
-                        placeholder="Phone"
-                        value={phone}
-                        onChange={(e) => setPhone(e.target.value)}
-                        className="w-full p-2 border rounded"
-                    />
-                    <input
-                        type="text"
-                        placeholder="Department"
-                        value={department}
-                        onChange={(e) => setDepartment(e.target.value)}
-                        className="w-full p-2 border rounded"
+                        className="border p-2 rounded w-64"
                     />
                     <button
                         type="submit"
-                        className="w-full bg-blue-500 text-white font-semibold py-2 rounded hover:bg-blue-600 transition"
+                        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
                     >
-                        Update
+                        Submit
                     </button>
                 </form>
             </div>
