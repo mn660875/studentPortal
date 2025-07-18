@@ -16,7 +16,7 @@ export default function Navbar() {
           
           <div className="flex items-center gap-2">
             <RiUserSettingsFill/>
-          <Link href={`/Updateuser/`} className="hover:bg-blue-500 rounded p-2">Settings</Link>
+          <Link href={`/Updateuser/`} className="hover:bg-blue-500 rounded p-2">About</Link>
           </div>
           <div className="flex items-center gap-2">
             <FaUser/>

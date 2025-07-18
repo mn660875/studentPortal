@@ -8,7 +8,7 @@ export default function DeleteUsers(props){
     const deleteRecord=async()=>{
         const confirmDelete = window.confirm("Are you sure you want to delete this user?");
         if (!confirmDelete) return;
-        let response= await fetch(`${process.env.NEXT_PUBLIC_SITE_URL}/api/students/${props.id}`,{
+        let response= await fetch(`http://localhost:3000/api/students/${props.id}`,{
             method:"DELETE",
             })
             response= await response.json();
@@ -17,7 +17,7 @@ export default function DeleteUsers(props){
                setTimeout(() => {
                 toast.success("Student deleted successfully");
                }, 1000);
-               router.push("/dashboard")
+               router.push("/profile")
                 
             }
     }

@@ -54,7 +54,7 @@ export default async function StudentProfile(props) {
                 <div className="shadow-lg col-span-2 bg-[#CCCCFF] row-span-2 rounded-lg p-5">
                     <p className="text-gray-700">Name:</p>
                     <h1 className="text-xl font-semibold">{student.name}</h1>
-                    <h4 className="text-gray-500">S/O</h4>
+                    <h4 className="text-gray-500">S/O & D/O</h4>
                     <h1 className="text-xl font-semibold">{student.fatherName}</h1>
                     <div className="mt-2 flex">
                         <p className="text-gray-700">Phone#:</p>
@@ -62,7 +62,7 @@ export default async function StudentProfile(props) {
                     </div>
                     <div className="mt-4 flex gap-2">
                         <Link
-                            href="/dashboard"
+                            href="/profile"
                             className="bg-gray-500 p-2 rounded-lg mt-5 text-white font-semibold"
                         >
                             Back

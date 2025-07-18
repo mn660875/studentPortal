@@ -25,7 +25,7 @@ export default function Page() {
       toast.error("Username or Password didnt Matched");
     } else {
       toast.success("Loged in");
-      router.push("/login/profile");
+      router.push("/");
     }
   };
 

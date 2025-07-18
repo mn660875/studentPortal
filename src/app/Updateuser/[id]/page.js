@@ -45,11 +45,20 @@ export default function Page() {
   
 }, []);
   const handleStudent = async (e) => {
+
     e.preventDefault();
+    const validatePakistaniNumber = (num) => {
+      const regex = /^(?:\+92|0092|92)?3\d{9}$/;
+      return regex.test(num);
+  };
     if (!name.trim() || !fatherName.trim() || !email.trim() || !department.trim() || !phone.trim() ) {
       toast.error("Fields Should Not be Empty");
       return;
     }
+   if(!validatePakistaniNumber(phone)){
+    toast.error("Invalid Pakistani number format.")
+    return
+   }
 
     try {
       let res = await fetch(
