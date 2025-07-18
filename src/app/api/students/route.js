@@ -20,7 +20,7 @@ export async function GET(){
     return NextResponse.json({result:data , success})
   }
 
-export async function POST(request){
+  export async function POST(request){
     const payload= await request.json()
     await mongoose.connect(connectionStr)
     let product= new Student(payload)

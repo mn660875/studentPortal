@@ -26,7 +26,7 @@ export default function Navbar() {
             <TiUserAdd/>
           <Link href={"/addstudent"} className="hover:bg-blue-500 rounded p-2">Add Student</Link>
           </div>
-         
+         <h1 className="absolute bottom-3 font-semibold">Powered by Nasir</h1>
         </nav>
       </div>
     );

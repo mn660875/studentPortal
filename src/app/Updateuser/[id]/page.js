@@ -19,10 +19,9 @@ export default function Page() {
   const getUserDetails = async () => {
     try {
       let res = await fetch(
-        `${process.env.NEXT_PUBLIC_SITE_URL}/api/students/${id}`
+        `http://localhost:3000/api/students/${id}`
       );
       let data = await res.json();
-      console.log(data);
 
       if (data.success) {
         setName(data.result.name || "")
@@ -62,7 +61,7 @@ export default function Page() {
 
     try {
       let res = await fetch(
-        `${process.env.NEXT_PUBLIC_SITE_URL}/api/students/${id}`,
+        `http://localhost:3000/api/students/${id}`,
         {
           method: "PUT",
           headers: {
@@ -107,6 +106,7 @@ export default function Page() {
             placeholder="Father's Name"
             value={fatherName}
             onChange={(e) => setFatherName(e.target.value)}
+            disabled={true}
             className="border p-2 rounded w-64"
           />
           <input
@@ -120,6 +120,7 @@ export default function Page() {
           placeholder="Department"
           value={department}
           onChange={(e) => setDepartment(e.target.value)}
+          disabled={true}
           className="border p-2 rounded w-64"
         />
           

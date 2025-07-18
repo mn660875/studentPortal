@@ -17,10 +17,19 @@ const getStudent = async () => {
 };
 
 export default function StudentList() {
+  const today = new Date().toLocaleDateString("en-US", {
+    weekday: "long",
+    year: "numeric",
+    month: "long",
+    day: "numeric",
+});
+
+
+
   const [students, setStudents] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
-  const studentsPerPage = 8;
+  const studentsPerPage = 7;
 
   useEffect(() => {
     const fetchStudents = async () => {
@@ -54,7 +63,7 @@ export default function StudentList() {
      </div>
 
       <div className="p-4 flex-1 h-screen overflow-auto">
-        <div className="w-full max-w-md mb-4">
+        <div className="w-full max-w-md mb-4 ">
           <input
             type="text"
             placeholder="Search student..."
@@ -62,6 +71,7 @@ export default function StudentList() {
             onChange={(e) => setSearchQuery(e.target.value)}
             className="border p-2 rounded w-full"
           />
+          <p>Today: {today}</p>
         </div>
 
         <div className="overflow-x-auto">
@@ -75,6 +85,7 @@ export default function StudentList() {
                 <th className="border p-2 text-xs md:text-sm">Department</th>
                 <th className="border p-2 text-xs md:text-sm">Roll#</th>
                 <th className="border p-2 text-xs md:text-sm">Registration#</th>
+              
                 <th className="border p-2 text-xs md:text-sm">Action</th>
               </tr>
             </thead>
@@ -89,6 +100,9 @@ export default function StudentList() {
                     <td className="border p-2">{item.department}</td>
                     <td className="border p-2">{item.rollno}</td>
                     <td className="border p-2">{item.registration}</td>
+    
+
+
                     <td className="border p-2 flex justify-center gap-2">
                       <Link href={`/dashboard/${item._id}`} className="text-blue-600">
                         <FaUserEdit className="text-lg text-[#468FEA]  p-1  md:text-[30px] rounded-md" />
