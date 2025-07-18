@@ -49,7 +49,9 @@ export default function StudentList() {
 
   return (
     <div className="flex min-h-screen">
-      <Navbar />
+     <div className="hidden md:block">
+     <Navbar />
+     </div>
 
       <div className="p-4 flex-1 h-screen overflow-auto">
         <div className="w-full max-w-md mb-4">
