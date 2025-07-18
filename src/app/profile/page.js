@@ -89,7 +89,7 @@ export default function StudentList() {
                     <td className="border p-2">{item.registration}</td>
                     <td className="border p-2 flex justify-center gap-2">
                       <Link href={`/dashboard/${item._id}`} className="text-blue-600">
-                        <FaUserEdit className="text-lg md:text-xl" />
+                        <FaUserEdit className="text-lg text-[#468FEA]  p-1  md:text-[30px] rounded-md" />
                       </Link>
                       <DeleteUsers id={item._id} />
                     </td>

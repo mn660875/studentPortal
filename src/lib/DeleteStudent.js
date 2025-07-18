@@ -22,19 +22,8 @@ export default function DeleteUsers(props){
             }
     }
     return(
-        <button style={
-            {
-                backgroundColor:"#B31B1B",
-                border:"none",
-                outline:"none",
-                padding: "6px 8px",
-                color: "white",
-                borderRadius:"6px",
-                display:"flex",
-                alignItems:"center",
-                cursor:"pointer",
-                gap:"4px"
-            }}
+        <button 
+            className="text-lg text-[#de1a1a]  p-1  md:text-xl rounded-md"
             
             onClick={deleteRecord}><FaTrash/></button>
     )
