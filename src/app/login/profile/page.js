@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import Navbar from "../components/Navbar";
+import Navbar from "../../components/Navbar";
 import { useEffect, useState } from "react";
 import DeleteUsers from "@/lib/DeleteStudent";
 import { useRouter } from "next/navigation";
