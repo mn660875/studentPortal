@@ -48,7 +48,7 @@ export default function StudentList() {
   }, [searchQuery]);
 
   return (
-    <div className="flex flex-col lg:flex-row h-screen">
+    <div className="flex min-h-screen">
       <Navbar />
 
       <div className="p-4 flex-1 h-screen overflow-auto">
