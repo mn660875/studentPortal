@@ -19,7 +19,7 @@ export default function Page() {
   const getUserDetails = async () => {
     try {
       let res = await fetch(
-        `http://localhost:3000/api/students/${id}`
+        `${process.env.NEXT_PUBLIC_SITE_URL}/api/students/${id}`
       );
       let data = await res.json();
 
@@ -61,7 +61,7 @@ export default function Page() {
 
     try {
       let res = await fetch(
-        `http://localhost:3000/api/students/${id}`,
+        `${process.env.NEXT_PUBLIC_SITE_URL}/api/students/${id}`,
         {
           method: "PUT",
           headers: {
